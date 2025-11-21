@@ -23,13 +23,13 @@ int main(int argc, const char * argv[]) {
     bool isToreidal;
     int Toreidal;
     std::cin >>Toreidal;
-    if (Toreidal == 1) {isToreidal = true;} if (Toreidal == 2) {isToreidal = false;}
+    (Toreidal == 1) ? isToreidal = true : isToreidal = false;
     std::cout <<"Comment souhaitez vous initialiser votre tableau ?\n";
     std::cout <<"\t1. vide\n"
                 "\t2. plein\n"
                 "\t3. a damier\n"
                 "\t4. aleatoirement\n"
-                "\t5. importer un fichier\n"
+                "\t5. ----(importer un fichier)----\n"
                 "\n-->";
     int choix;
     std::cin >>choix;

@@ -131,19 +131,17 @@ Grille::Grille(const Grille &autre)
 
 Grille Grille::iteration(const Grille &grilleInitiale)
 {
-    Grille grilleVoisins;
     const int initialwidth = grilleInitiale.width;
     const int initialheight = grilleInitiale.height;
-    grilleVoisins.width = initialwidth;
-    grilleVoisins.height = initialheight;
-    grilleVoisins.isToreidal = grilleInitiale.isToreidal;
+
+    // Créer grilleVoisins avec les bonnes dimensions
+    Grille grilleVoisins(initialwidth, initialheight, grilleInitiale.isToreidal);
 
     int count;
     if (grilleInitiale.isToreidal)
     {
         for (int i = 0; i < initialwidth; i++)
         {
-            grilleVoisins.grille[i] = new int[initialheight];
             for (int j = 0; j < initialheight; j++)
             {
                 count = 0;
@@ -185,7 +183,6 @@ Grille Grille::iteration(const Grille &grilleInitiale)
     {
         for (int i = 0; i < initialwidth; i++)
         {
-            grilleVoisins.grille[i] = new int[initialheight];
             for (int j = 0; j < initialheight; j++)
             {
                 count = 0;
@@ -227,13 +224,10 @@ Grille Grille::iteration(const Grille &grilleInitiale)
         }
     }
 
-    Grille nouvelleGrille;
-    nouvelleGrille.width = initialwidth;
-    nouvelleGrille.height = initialheight;
-    nouvelleGrille.isToreidal = grilleInitiale.isToreidal;
+    // Créer nouvelleGrille avec les bonnes dimensions
+    Grille nouvelleGrille(initialwidth, initialheight, grilleInitiale.isToreidal);
     for (int i = 0; i < initialwidth; i++)
     {
-        nouvelleGrille.grille[i] = new int[initialheight];
         for (int j = 0; j < initialheight; j++)
         {
             // si cellule vivante et 2 ou 3 voisins
@@ -261,11 +255,11 @@ Grille Grille::iteration(const Grille &grilleInitiale)
 }
 
 // réaliser un nombre n d'itérations
-Grille Grille::iterations(Grille &grilleInitiale, const int nbrOfIteration)
+Grille Grille::iterations(Grille &grilleInitiale, const int nbrIteration)
 {
     Grille grilleUtilisable = grilleInitiale;
     Grille nouvelleGrille = grilleInitiale;
-    for (int x = 0; x < nbrOfIteration; ++x)
+    for (int x = 0; x < nbrIteration; x++)
     {
         nouvelleGrille = iteration(grilleUtilisable);
         grilleUtilisable = nouvelleGrille;
